@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarah & Michael's Wedding</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            color: #5e503f;
+            overflow-x: hidden;
+            background-color: #faf7f5;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Parallax base styles */
+        .parallax-container {
+            height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+            perspective: 1px;
+        }
+
+        .parallax-section {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform-style: preserve-3d;
+        }
+
+        .parallax-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            transform: translateZ(-1px) scale(2);
+            z-index: -1;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .content {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transform: translateZ(0);
+        }
+
+        /* Enhanced Envelope styles with parallax */
+        .envelope-section {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 2s ease;
+        }
+
+        .envelope-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            filter: brightness(0.8);
+            z-index: -1;
+        }
+
+        .envelope-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: -1;
+        }
+
+        .envelope {
+            width: 300px;
+            height: 200px;
+            background-color: #d4a373;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 1s ease;
+            z-index: 10;
+        }
+
+        .envelope-front {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #d4a373;
+            z-index: 3;
+            transform-origin: top;
+            transition: transform 1.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            border: 2px solid #b08968;
+        }
+
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background-color: #b08968;
+            transform-origin: top;
+            z-index: 4;
+            clip-path: polygon(0 0, 50% 100%, 100% 0);
+            transition: transform 1.5s ease;
+        }
+
+        .envelope-card {
+            position: absolute;
+            width: 280px;
+            height: 180px;
+            background-color: #fff;
+            z-index: 2;
+            top: 10px;
+            left: 10px;
+            transition: transform 1.5s ease 0.5s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .envelope.open .envelope-front {
+            transform: rotateX(180deg);
+        }
+
+        .envelope.open .envelope-flap {
+            transform: rotateX(180deg);
+        }
+
+        .envelope.open .envelope-card {
+            transform: translateY(-100px);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            text-align: center;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0) translateX(-50%);
+            }
+
+            40% {
+                transform: translateY(-20px) translateX(-50%);
+            }
+
+            60% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+        }
+
+        /* Section styles */
+        .section {
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #5e503f;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #b08968;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* White fade transition between sections */
+        .section-transition {
+            position: relative;
+            height: 150px;
+            z-index: 1;
+        }
+
+        .fade-to-white {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, #faf7f5);
+            z-index: 2;
+        }
+
+        .fade-from-white {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, transparent, #faf7f5);
+            z-index: 2;
+        }
+
+        /* Hero section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            margin-top: 200vh;
+            /* Increased for longer envelope animation */
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.7);
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 40px;
+            /* Removed background color and blur effect */
+            border-radius: 10px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            /* Added text shadow for legibility */
+        }
+
+        .hero-date {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            /* Added text shadow for legibility */
+        }
+
+        /* Location section */
+        .location-details {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .location-name {
+            font-size: 1.8rem;
+            color: #d4a373;
+        }
+
+        .location-address {
+            font-size: 1.2rem;
+            color: #6c757d;
+        }
+
+        /* Dress code section */
+        .dress-code {
+            background-color: #f8e8e0;
+            padding: 60px 0;
+        }
+
+        .dress-code-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .dress-code-option {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 200px;
+        }
+
+        .dress-code-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #d4a373;
+        }
+
+        /* Estilos mejorados para la sección de cuenta regresiva */
+        #countdown-section {
+            background-color: #f8e8e0;
+            /* Fondo más llamativo */
+            padding: 100px 0;
+            /* Más espacio interno */
+        }
+
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            /* Más espacio entre los elementos */
+            margin-top: 40px;
+        }
+
+        .countdown-item {
+            background-color: #d4a373;
+            /* Color de fondo */
+            color: white;
+            padding: 30px;
+            /* Más padding para hacerlo más grande */
+            border-radius: 15px;
+            /* Bordes más redondeados */
+            min-width: 120px;
+            /* Ancho mínimo más grande */
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            /* Sombra más pronunciada */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .countdown-item:hover {
+            transform: translateY(-10px);
+            /* Efecto de elevación al pasar el mouse */
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .countdown-number {
+            font-size: 4rem;
+            /* Números más grandes */
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .countdown-label {
+            font-size: 1.2rem;
+            /* Texto más grande */
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            /* Espaciado entre letras */
+        }
+
+        /* Map section */
+        .map-container {
+            height: 400px;
+            width: 100%;
+            max-width: 800px;
+            margin: 30px auto;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* RSVP section */
+        .rsvp {
+            background-color: #5e503f;
+            color: white;
+            padding: 80px 0;
+        }
+
+        .rsvp-button {
+            display: inline-block;
+            background-color: #d4a373;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            text-decoration: none;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-family: 'Lato', sans-serif;
+        }
+
+        .rsvp-button:hover {
+            background-color: #b08968;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Spotify embed */
+        .spotify-container {
+            margin: 30px auto;
+            max-width: 300px;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .countdown-container {
+                flex-wrap: wrap;
+            }
+
+            .countdown-item {
+                min-width: 70px;
+            }
+
+            .dress-code-options {
+                gap: 15px;
+            }
+
+            .dress-code-option {
+                width: 150px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-date {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .envelope {
+                width: 250px;
+                height: 170px;
+            }
+
+            .envelope-card {
+                width: 230px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Enhanced Envelope Section with Parallax Background -->
+    <div class="envelope-section" id="envelope-section">
+        <div class="envelope-bg"
+            style="background-image: url('https://images.pexels.com/photos/844297/pexels-photo-844297.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');">
+        </div>
+        <div class="envelope-overlay"></div>
+        <div class="envelope" id="envelope">
+            <div class="envelope-flap"></div>
+            <div class="envelope-front"></div>
+            <div class="envelope-card">
+                <div>
+                    <h2>Estás invitado!</h2>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <p>Scroll Down</p>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 5V19M12 19L19 12M12 19L5 12" stroke="white" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+        </div>
+    </div>
+
+    <!-- Hero Section with Photo Background -->
+    <section class="hero" id="hero-section">
+        <div class="hero-bg"
+            style="background-image: url('https://images.pexels.com/photos/3419692/pexels-photo-3419692.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-title">Sarah Villareal</h1>
+            <p class="hero-date">15 de Junio, 2025</p>
+            <p class="hero-date">4:00 PM</p>
+
+
+            <iframe style="border-radius:12px"
+                src="https://open.spotify.com/embed/track/2lTm559tuIvatlT1u0JYG2?utm_source=generator" width="100%"
+                height="152" frameBorder="0" allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"></iframe>
+
+        </div>
+
+    </section>
+
+
+    <!-- Transition from Hero to Location -->
+    <div class="section-transition">
+        <div class="fade-to-white"></div>
+        <div class="fade-from-white"></div>
+    </div>
+
+    <!-- Location Section -->
+    <section class="section parallax-container" id="location-section">
+        <div class="parallax-section">
+            <div class="parallax-bg"
+                style="background-image: url('https://images.pexels.com/photos/2512387/pexels-photo-2512387.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
+            </div>
+            <div class="content">
+                <h2 class="section-title">Ceremony & Reception</h2>
+                <div class="location-details">
+                    <h3 class="location-name">Sunset Gardens</h3>
+                    <p class="location-address">123 Blossom Lane, Springville</p>
+                    <p>Doors open at 3:30 PM</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transition from Location to Photo -->
+    <div class="section-transition">
+        <div class="fade-to-white"></div>
+        <div class="fade-from-white"></div>
+    </div>
+
+    <!-- Photo Section -->
+    <section class="parallax-container" id="photo-section">
+        <div class="parallax-section">
+            <div class="parallax-bg"
+                style="background-image: url('https://images.pexels.com/photos/1200637/pexels-photo-1200637.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');">
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Código de Vestimenta -->
+    <section class="section dress-code" id="dress-code-section">
+        <div class="container">
+            <h2 class="section-title">Código de Vestimenta</h2>
+            <p class="section-subtitle">Vestimenta Formal</p>
+            <p>Agradecemos que todos los invitados vistan de manera formal para nuestro día especial.</p>
+
+            <div class="dress-code-options">
+                <div class="dress-code-option">
+                    <div class="dress-code-icon">👔</div>
+                    <h3>Hombres</h3>
+                    <p>Traje oscuro o esmoquin</p>
+                </div>
+                <div class="dress-code-option">
+                    <div class="dress-code-icon">👗</div>
+                    <h3>Mujeres</h3>
+                    <p>Vestido de cóctel o vestido formal</p>
+                </div>
+                <div class="dress-code-option">
+                    <div class="dress-code-icon">🎨</div>
+                    <h3>Colores</h3>
+                    <p>Tonos pastel</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transition from Dress Code to Countdown -->
+    <div class="section-transition">
+        <div class="fade-to-white"></div>
+        <div class="fade-from-white"></div>
+    </div>
+
+    <!-- Countdown Section -->
+    <section class="section" id="countdown-section">
+        <div class="container">
+            <h2 class="section-title">Cuenta regresiva</h2>
+            <div class="countdown-container" id="countdown">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="countdown-days">00</div>
+                    <div class="countdown-label">Días</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="countdown-hours">00</div>
+                    <div class="countdown-label">Horas</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="countdown-minutes">00</div>
+                    <div class="countdown-label">Minutos</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="countdown-seconds">00</div>
+                    <div class="countdown-label">Secgundos</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transition from Countdown to Map -->
+    <div class="section-transition">
+        <div class="fade-to-white"></div>
+        <div class="fade-from-white"></div>
+    </div>
+
+    <!-- Google Maps Section -->
+    <section class="section" id="map-section">
+        <div class="container">
+            <h2 class="section-title">Como llegar</h2>
+            <div class="map-container">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14576.877202528063!2d-104.67016343607554!3d24.023330638608797!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x869bc83b5829e8b5%3A0x2d2ee47623c3bc37!2sTemplo%20de%20Santa%20Ana!5e0!3m2!1sen!2smx!4v1742580806459!5m2!1sen!2smx"
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transition from Map to RSVP -->
+    <div class="section-transition">
+        <div class="fade-to-white"></div>
+        <div class="fade-from-white"></div>
+    </div>
+
+    <!-- RSVP Section -->
+    <section class="section rsvp" id="rsvp-section">
+        <div class="container">
+            <h2 class="section-title">Will You Join Us?</h2>
+            <p>Please RSVP by May 1, 2025</p>
+            <button class="rsvp-button" id="rsvp-button">Confirm Attendance</button>
+        </div>
+    </section>
+
+    <script>
+        // Enhanced envelope animation with parallax effect
+        const envelope = document.getElementById('envelope');
+        const envelopeSection = document.getElementById('envelope-section');
+        const heroSection = document.getElementById('hero-section');
+
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.scrollY;
+            const windowHeight = window.innerHeight;
+            const heroOffset = heroSection.offsetTop;
+
+            // Calculate how far we've scrolled as a percentage
+            const scrollPercentage = Math.min(scrollPosition / (heroOffset - windowHeight), 1);
+
+            // Open envelope when scrolled past 15% of the first section (adjusted for longer animation)
+            if (scrollPercentage > 0.15) {
+                envelope.classList.add('open');
+            } else {
+                envelope.classList.remove('open');
+            }
+
+            // Fade out envelope section as we approach the hero section
+            if (scrollPercentage > 0.9) {
+                envelopeSection.style.opacity = 1 - (scrollPercentage - 0.9) * 10; // Fade out over the last 10%
+
+                // When almost at the hero section, hide the envelope section completely
+                if (scrollPercentage > 0.97) {
+                    envelopeSection.style.pointerEvents = 'none';
+                } else {
+                    envelopeSection.style.pointerEvents = 'auto';
+                }
+            } else {
+                envelopeSection.style.opacity = 1;
+            }
+
+            // Parallax effect for the envelope background
+            const envelopeBg = document.querySelector('.envelope-bg');
+            envelopeBg.style.transform = `translateY(${scrollPosition * 0.4}px)`;
+        });
+
+        // Countdown timer
+        function updateCountdown() {
+            const weddingDate = new Date('June 15, 2025 16:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            // Time calculations
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display results
+            document.getElementById('countdown-days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('countdown-hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('countdown-minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('countdown-seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // RSVP button functionality
+        document.getElementById('rsvp-button').addEventListener('click', function () {
+            alert('Thank you for confirming your attendance! We look forward to celebrating with you.');
+            // In a real implementation, this would submit to a form or API
+        });
+
+        // Parallax effect on scroll for other sections
+        window.addEventListener('scroll', function () {
+            const parallaxBgs = document.querySelectorAll('.parallax-bg');
+
+            parallaxBgs.forEach(bg => {
+                const scrollPosition = window.pageYOffset;
+                const parent = bg.parentElement.parentElement;
+                const parentTop = parent.offsetTop;
+                const speed = 0.5;
+
+                // Calculate parallax offset
+                const offset = (scrollPosition - parentTop) * speed;
+
+                // Apply transform
+                bg.style.transform = `translateY(${offset}px) translateZ(-1px) scale(2)`;
+            });
+        });
+    </script>
+</body>
+
+</html>
