@@ -7,11 +7,20 @@
     <title>Sarah & Michael's Wedding</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Enlace a FontAwesome para los iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap"
         rel="stylesheet">
     <style>
-        /* Reset and base styles */
+        /* Definir la fuente */
+        @font-face {
+            font-family: 'Titulos1';
+            /* Nombre de la fuente */
+            src: url('fonts/EasterBold.ttf') format('truetype');
+            /* Ruta de la fuente */
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -53,7 +62,7 @@
 
         .parallax-section {
             position: relative;
-            height: 100vh;
+            height: 80vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -228,7 +237,7 @@
         .section-title {
             font-size: 2.5rem;
             margin-bottom: 30px;
-            color: #5e503f;
+            color: #0b011a;
         }
 
         .section-subtitle {
@@ -267,17 +276,16 @@
             z-index: 2;
         }
 
-        /* Hero section */
+        /* Estilos para la sección hero con parallax */
         .hero {
             position: relative;
-            height: 100vh;
+            height: 90vh;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             text-align: center;
-            margin-top: 200vh;
-            /* Increased for longer envelope animation */
+            overflow: hidden;
         }
 
         .hero-bg {
@@ -286,31 +294,32 @@
             left: 0;
             width: 100%;
             height: 100%;
+            background-image: url('https://images.pexels.com/photos/1059054/pexels-photo-1059054.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
+            /* Efecto parallax */
             filter: brightness(0.7);
             z-index: -1;
+            transform: translateZ(0);
+            /* Mejora el rendimiento del parallax */
         }
 
         .hero-content {
             max-width: 800px;
             padding: 40px;
-            /* Removed background color and blur effect */
             border-radius: 10px;
         }
 
         .hero-title {
-            font-size: 3.5rem;
+            font-size: 7rem;
             margin-bottom: 20px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-            /* Added text shadow for legibility */
+            font-family: 'Titulos1', sans-serif;
         }
 
         .hero-date {
             font-size: 1.5rem;
-            margin-bottom: 30px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-            /* Added text shadow for legibility */
+            margin-bottom: 10px;
         }
 
         /* Location section */
@@ -460,7 +469,7 @@
         /* Responsive styles */
         @media (max-width: 768px) {
             .hero-title {
-                font-size: 2.5rem;
+                font-size: 5rem;
             }
 
             .section-title {
@@ -486,7 +495,7 @@
 
         @media (max-width: 480px) {
             .hero-title {
-                font-size: 2rem;
+                font-size: 7rem;
             }
 
             .hero-date {
@@ -494,7 +503,7 @@
             }
 
             .section-title {
-                font-size: 1.8rem;
+                font-size: 2rem;
             }
 
             .envelope {
@@ -507,11 +516,154 @@
                 height: 150px;
             }
         }
+
+        .location-text-section {
+            background-color: #f8e8e0;
+            /* Fondo pastel */
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .location-text-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            /* Fondo blanco semi-transparente */
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            /* Sombra suave */
+        }
+
+        .location-text {
+            font-size: 1.2rem;
+            color: #5e503f;
+            /* Color de texto oscuro */
+            margin-top: 20px;
+            line-height: 1.6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            /* Espacio entre el icono y el texto */
+        }
+
+        .location-text i {
+            color: #d4a373;
+            /* Color del icono */
+            font-size: 5rem;
+            /* Tamaño del icono más grande */
+        }
+
+        /* Estilos para la sección de la foto */
+        .parallax-container {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .parallax-section {
+            position: relative;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .parallax-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+
+        /* Estilos para la frase */
+        .photo-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 1;
+        }
+
+        .animated-text {
+            font-size: 3rem;
+            /* Tamaño de la fuente */
+            color: white;
+            /* Color del texto */
+            font-family: 'Playfair Display', serif;
+            /* Fuente elegante */
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+            /* Sombra para mejorar la legibilidad */
+            opacity: 0;
+            /* Inicialmente invisible */
+            animation: fadeIn 1s ease-in-out forwards;
+            /* Animación de aparición */
+        }
+
+        /* Animación de aparición */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+                /* Inicia ligeramente abajo */
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                /* Termina en su posición original */
+            }
+        }
+         /* Estilos para la sección de confirmación */
+    .confirmation-section {
+        background-color: #f8e8e0; /* Fondo pastel */
+        padding: 100px 0;
+        text-align: center;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+        color: #5e503f; /* Color oscuro */
+        margin-bottom: 20px;
+        font-family: 'Playfair Display', serif; /* Fuente elegante */
+    }
+
+    .section-subtitle {
+        font-size: 1.2rem;
+        color: #b08968; /* Color dorado */
+        margin-bottom: 40px;
+        font-family: 'Lato', sans-serif; /* Fuente secundaria */
+    }
+
+    /* Estilos para el botón */
+    .confirmation-button {
+        background-color: #d4a373; /* Color dorado */
+        color: white;
+        padding: 20px 50px;
+        font-size: 1.5rem;
+        border: none;
+        border-radius: 50px; /* Bordes redondeados */
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    }
+
+    .confirmation-button:hover {
+        background-color: #b08968; /* Color más oscuro al pasar el mouse */
+        transform: translateY(-5px); /* Efecto de elevación */
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); /* Sombra más pronunciada */
+    }
     </style>
 </head>
 
 <body>
-    <!-- Enhanced Envelope Section with Parallax Background -->
+    <!-- Enhanced Envelope Section with Parallax Background
     <div class="envelope-section" id="envelope-section">
         <div class="envelope-bg"
             style="background-image: url('https://images.pexels.com/photos/844297/pexels-photo-844297.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');">
@@ -533,64 +685,57 @@
                     stroke-linejoin="round" />
             </svg>
         </div>
-    </div>
+    </div> -->
 
     <!-- Hero Section with Photo Background -->
+    <!-- Sección Hero con efecto parallax -->
     <section class="hero" id="hero-section">
-        <div class="hero-bg"
-            style="background-image: url('https://images.pexels.com/photos/3419692/pexels-photo-3419692.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
-        </div>
+        <div class="hero-bg"></div> <!-- Fondo con parallax -->
         <div class="hero-content">
             <h1 class="hero-title">Sarah Villareal</h1>
             <p class="hero-date">15 de Junio, 2025</p>
             <p class="hero-date">4:00 PM</p>
 
+            <div class="spotify-container">
+                <!-- Spotify Embed -->
+                <iframe style="border-radius:12px"
+                    src="https://open.spotify.com/embed/track/1u8c2t2Cy7UBoG4ArRcF5g?utm_source=generator" width="100%"
+                    height="152" frameBorder="0" allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"></iframe>
+            </div>
 
-            <iframe style="border-radius:12px"
-                src="https://open.spotify.com/embed/track/2lTm559tuIvatlT1u0JYG2?utm_source=generator" width="100%"
-                height="152" frameBorder="0" allowfullscreen=""
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                loading="lazy"></iframe>
 
         </div>
-
     </section>
 
+    <!-- Nueva Sección de Ubicación -->
+    <section class="section location-text-section">
 
-    <!-- Transition from Hero to Location -->
-    <div class="section-transition">
-        <div class="fade-to-white"></div>
-        <div class="fade-from-white"></div>
-    </div>
+        <div class="container">
+            <div class="location-text-content">
+                <i class="fas fa-map-marker-alt"></i> <!-- Icono de ubicación -->
 
-    <!-- Location Section -->
-    <section class="section parallax-container" id="location-section">
-        <div class="parallax-section">
-            <div class="parallax-bg"
-                style="background-image: url('https://images.pexels.com/photos/2512387/pexels-photo-2512387.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
-            </div>
-            <div class="content">
-                <h2 class="section-title">Ceremony & Reception</h2>
-                <div class="location-details">
-                    <h3 class="location-name">Sunset Gardens</h3>
-                    <p class="location-address">123 Blossom Lane, Springville</p>
-                    <p>Doors open at 3:30 PM</p>
-                </div>
+                <h2 class="section-title">Ubicación del Evento</h2>
+                <p class="location-text">
+                    Anton de Eresilta El Prisma, Ciudad Yulong, Juan Escalta, Bucanga, Mexico
+                </p>
             </div>
         </div>
     </section>
 
-    <!-- Transition from Location to Photo -->
-    <div class="section-transition">
-        <div class="fade-to-white"></div>
-        <div class="fade-from-white"></div>
-    </div>
+
+
 
     <!-- Photo Section -->
     <section class="parallax-container" id="photo-section">
         <div class="parallax-section">
             <div class="parallax-bg"
-                style="background-image: url('https://images.pexels.com/photos/1200637/pexels-photo-1200637.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');">
+                style="background-image: url('https://images.pexels.com/photos/29636210/pexels-photo-29636210/free-photo-of-elegant-woman-by-tranquil-lake-at-twilight.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
+            </div>
+            <!-- Frase con animación -->
+            <div class="photo-text">
+                <p class="animated-text">"Un momento inolvidable"</p>
             </div>
         </div>
     </section>
@@ -622,11 +767,6 @@
         </div>
     </section>
 
-    <!-- Transition from Dress Code to Countdown -->
-    <div class="section-transition">
-        <div class="fade-to-white"></div>
-        <div class="fade-from-white"></div>
-    </div>
 
     <!-- Countdown Section -->
     <section class="section" id="countdown-section">
@@ -645,19 +785,12 @@
                     <div class="countdown-number" id="countdown-minutes">00</div>
                     <div class="countdown-label">Minutos</div>
                 </div>
-                <div class="countdown-item">
-                    <div class="countdown-number" id="countdown-seconds">00</div>
-                    <div class="countdown-label">Secgundos</div>
-                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Transition from Countdown to Map -->
-    <div class="section-transition">
-        <div class="fade-to-white"></div>
-        <div class="fade-from-white"></div>
-    </div>
+
 
     <!-- Google Maps Section -->
     <section class="section" id="map-section">
@@ -672,21 +805,13 @@
         </div>
     </section>
 
-    <!-- Transition from Map to RSVP -->
-    <div class="section-transition">
-        <div class="fade-to-white"></div>
-        <div class="fade-from-white"></div>
-    </div>
-
-    <!-- RSVP Section -->
-    <section class="section rsvp" id="rsvp-section">
+    <section class="section confirmation-section">
         <div class="container">
-            <h2 class="section-title">Will You Join Us?</h2>
-            <p>Please RSVP by May 1, 2025</p>
-            <button class="rsvp-button" id="rsvp-button">Confirm Attendance</button>
+            <h2 class="section-title">¿Nos acompañas?</h2>
+            <p class="section-subtitle">Confirma tu asistencia para nuestro día especial</p>
+            <button class="confirmation-button">Confirmar Asistencia</button>
         </div>
     </section>
-
     <script>
         // Enhanced envelope animation with parallax effect
         const envelope = document.getElementById('envelope');
