@@ -277,40 +277,37 @@
         }
 
         /* Estilos para la sección hero con parallax */
+        /* Hero Section */
         .hero {
-            position: relative;
-            height: 90vh;
+            height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            text-align: center;
-            overflow: hidden;
-        }
-
-        .hero-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://images.pexels.com/photos/1059054/pexels-photo-1059054.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+            background-image: url('https://images.pexels.com/photos/1059054/pexels-photo-1059054.jpeg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            /* Efecto parallax */
             filter: brightness(0.7);
-            z-index: -1;
-            transform: translateZ(0);
-            /* Mejora el rendimiento del parallax */
+            position: relative;
+            overflow: hidden;
         }
 
         .hero-content {
             max-width: 800px;
             padding: 40px;
             border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            opacity: 0; /* Inicialmente invisible */
+            transform: translateY(20px); /* Inicia ligeramente abajo */
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
         }
 
+        .hero-content.visible {
+            opacity: 1; /* Visible */
+            transform: translateY(0); /* Vuelve a su posición original */
+        }
         .hero-title {
             font-size: 7rem;
             margin-bottom: 20px;
@@ -340,10 +337,41 @@
             color: #6c757d;
         }
 
-        /* Dress code section */
         .dress-code {
             background-color: #f8e8e0;
             padding: 60px 0;
+            opacity: 0; /* Inicialmente invisible */
+            transform: translateY(20px); /* Inicia ligeramente abajo */
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+        }
+
+        .dress-code.visible {
+            opacity: 1; /* Visible */
+            transform: translateY(0); /* Vuelve a su posición original */
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: #0b011a;
+            margin-bottom: 30px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: #b08968;
+            margin-bottom: 20px;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         .dress-code-options {
@@ -368,59 +396,69 @@
             color: #d4a373;
         }
 
-        /* Estilos mejorados para la sección de cuenta regresiva */
+         /* Sección de Cuenta Regresiva */
         #countdown-section {
             background-color: #f8e8e0;
-            /* Fondo más llamativo */
             padding: 100px 0;
-            /* Más espacio interno */
+            opacity: 0; /* Inicialmente invisible */
+            transform: translateY(20px); /* Inicia ligeramente abajo */
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+        }
+
+        #countdown-section.visible {
+            opacity: 1; /* Visible */
+            transform: translateY(0); /* Vuelve a su posición original */
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: #0b011a;
+            margin-bottom: 30px;
+            font-family: 'Playfair Display', serif;
         }
 
         .countdown-container {
             display: flex;
             justify-content: center;
             gap: 30px;
-            /* Más espacio entre los elementos */
             margin-top: 40px;
         }
 
         .countdown-item {
             background-color: #d4a373;
-            /* Color de fondo */
             color: white;
             padding: 30px;
-            /* Más padding para hacerlo más grande */
             border-radius: 15px;
-            /* Bordes más redondeados */
             min-width: 120px;
-            /* Ancho mínimo más grande */
             text-align: center;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            /* Sombra más pronunciada */
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .countdown-item:hover {
             transform: translateY(-10px);
-            /* Efecto de elevación al pasar el mouse */
             box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
         }
 
         .countdown-number {
             font-size: 4rem;
-            /* Números más grandes */
             font-weight: bold;
             margin-bottom: 10px;
         }
 
         .countdown-label {
             font-size: 1.2rem;
-            /* Texto más grande */
             text-transform: uppercase;
             letter-spacing: 1px;
-            /* Espaciado entre letras */
         }
-
         /* Map section */
         .map-container {
             height: 400px;
@@ -517,42 +555,52 @@
             }
         }
 
-        .location-text-section {
-            background-color: #f8e8e0;
-            /* Fondo pastel */
-            padding: 80px 0;
+          /* Sección de Ubicación */
+          .location-text-section {
+            height: 35vh; /* Asegura que la sección ocupe toda la pantalla */
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
+            opacity: 0; /* Inicialmente invisible */
+            transform: translateY(20px); /* Inicia ligeramente abajo */
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+        }
+
+        .location-text-section.visible {
+            opacity: 1; /* Visible */
+            transform: translateY(0); /* Vuelve a su posición original */
         }
 
         .location-text-content {
             max-width: 800px;
-            margin: 0 auto;
             padding: 20px;
             background-color: rgba(255, 255, 255, 0.9);
-            /* Fondo blanco semi-transparente */
             border-radius: 10px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            /* Sombra suave */
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: #5e503f;
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
         }
 
         .location-text {
             font-size: 1.2rem;
             color: #5e503f;
-            /* Color de texto oscuro */
             margin-top: 20px;
             line-height: 1.6;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
-            /* Espacio entre el icono y el texto */
+            gap: 10px; /* Espacio entre el icono y el texto */
         }
 
         .location-text i {
-            color: #d4a373;
-            /* Color del icono */
-            font-size: 5rem;
-            /* Tamaño del icono más grande */
+            color: #d4a373; /* Color del icono */
+            font-size: 2rem; /* Tamaño del icono */
         }
 
         /* Estilos para la sección de la foto */
@@ -663,31 +711,7 @@
 </head>
 
 <body>
-    <!-- Enhanced Envelope Section with Parallax Background
-    <div class="envelope-section" id="envelope-section">
-        <div class="envelope-bg"
-            style="background-image: url('https://images.pexels.com/photos/844297/pexels-photo-844297.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');">
-        </div>
-        <div class="envelope-overlay"></div>
-        <div class="envelope" id="envelope">
-            <div class="envelope-flap"></div>
-            <div class="envelope-front"></div>
-            <div class="envelope-card">
-                <div>
-                    <h2>Estás invitado!</h2>
-                </div>
-            </div>
-        </div>
-        <div class="scroll-indicator">
-            <p>Scroll Down</p>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 5V19M12 19L19 12M12 19L5 12" stroke="white" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" />
-            </svg>
-        </div>
-    </div> -->
 
-    <!-- Hero Section with Photo Background -->
     <!-- Sección Hero con efecto parallax -->
     <section class="hero" id="hero-section">
         <div class="hero-bg"></div> <!-- Fondo con parallax -->
@@ -795,7 +819,7 @@
     <!-- Google Maps Section -->
     <section class="section" id="map-section">
         <div class="container">
-            <h2 class="section-title">Como llegar</h2>
+            <h2 class="section-title ">Como llegar</h2>
             <div class="map-container">
                 <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14576.877202528063!2d-104.67016343607554!3d24.023330638608797!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x869bc83b5829e8b5%3A0x2d2ee47623c3bc37!2sTemplo%20de%20Santa%20Ana!5e0!3m2!1sen!2smx!4v1742580806459!5m2!1sen!2smx"
@@ -899,6 +923,26 @@
             });
         });
     </script>
+        <script>
+            // Intersection Observer para animar las secciones
+            const sections = document.querySelectorAll('.section, .hero-content');
+    
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Añade la clase "visible" cuando el elemento entra en la vista
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.5 // Activa la animación cuando el 50% del elemento es visible
+            });
+    
+            // Observa cada sección
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        </script>
 </body>
 
 </html>
